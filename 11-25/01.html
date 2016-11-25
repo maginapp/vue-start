@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <div class="col-md-6 col-md-offset-3"><h1>Vue demo</h1>
+        <div id="app">
+            <input type="text" v-model='mytest'>
+            <!--<p v-model='mytest2'></p>-->
+            <!--<p v-bind='mytest1'></p>-->
+            <p>{{mytest.split(' ').join('-')}} 11122</p>
+        </div>
+    </div>
+</div>
+
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            mytest: '测试的值 hello world'
+        }
+    })
+</script>
+</body>
+</html>

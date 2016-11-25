@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <div class="col-md-6 col-md-offset-3">
+        <h1>取代了之前的v-repeat</h1>
+
+        <div id="app"> .......
+
+            <ul>
+                <li v-for='item in books'>
+                    <span>{{item.id}}</span>
+                    <span>{{item.author}}</span>
+                    <span>{{item.name}}</span>
+                    <span>{{item.price}}</span>
+                </li>
+            </ul>
+            <ul>
+                <li v-for='item in lists'>
+                    <span>{{item}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            book: {id: 0, author: '', name: '', price: ''},
+            books: [{id: 1, author: '曹雪芹', name: '红楼梦', price: 32.0}, {
+                id: 2,
+                author: '施耐庵',
+                name: '水浒传',
+                price: 30.0
+            }, {id: '3', author: '罗贯中', name: '三国演义', price: 24.0}, {id: 4, author: '吴承恩', name: '西游记', price: 20.0}],
+            lists: [1,2,3,4,5,1,2,3,3,45,6]
+        }
+    })
+</script>
+</body>
+</html>
