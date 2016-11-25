@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <div class="col-md-6 col-md-offset-3"><h1>Vue demo</h1>
+        <div id="app">
+            <div>{{message}}</div>
+            <input type="text" v-model="message">
+        </div>
+    </div>
+</div>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'hello'
+        }
+    })
+</script>
+</body>
+</html>
