@@ -19,12 +19,14 @@
             </ul>
 
 
-            <tr v-for="book in books ">
-                <td>{{book.id}}</td>
-                <td>{{book.name}}</td>
-                <td>{{book.author}}</td>
-                <td>{{book.price}}</td>
-            </tr>
+            <table>
+                <tr v-for="book in books ">
+                    <td>{{book.id}}</td>
+                    <td>{{book.name}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.price}}</td>
+                </tr>
+            </table>
         </div>
         <!--<div id="add-book">-->
             <!--<legend>添加书籍</legend>-->
