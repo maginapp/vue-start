@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+        /*p {*/
+            /*display: none;*/
+        /*}*/
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="col-md-6 col-md-offset-3"><h1>Vue demo</h1>
+        <div id="app">
+            <table>
+                <tr>
+                    <th class="text-right" @click="sortBy('id')">序号</th>
+                    <th class="text-right" @click="sortBy('name')">书名</th>
+                    <th class="text-right" @click="sortBy('author')">作者</th>
+                    <th class="text-right" @click="sortBy('price')">价格</th>
+                </tr>
+
+                <tr v-for="book in books | orderBy sortType">
+                    <td>{{book.id}}</td>
+                    <td>{{book.name}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.price}}</td>
+                    <td>
+                        <template v-if="book.id%2==0">
+                    <td class="text-right"> ......
+                        <button type="button" class="btn btn-success" @click="delBook(book)">删除</button>
+                        .....
+                    </td>
+                    </template>
+                    <template v-else> .....
+                        <td class="text-right">
+                            <button type="button" class="btn btn-danger" @click="delBook(book)">删除</button>
+                        </td>
+                        ....
+                    </template>
+
+                    </td>
+                    <td>
+                        <template v-if='true'>
+                            <p>2222</p>
+                        </template>
+                    </td>
+                </tr>
+            </table>
+
+            <button v-on:click='doSomething'>doSomething</button>
+            <button @click='doSomething'>doSomething</button>
+
+            <p>书单总价：{{mysum}}</p>
+            <div id="add-book">
+                <legend>添加书籍</legend>
+                <div class="form-group"><label for="">书名</label> <input type="text" class="form-control"
+                                                                        v-model="book.name"></div>
+                <div class="form-group"><label for="">作者</label> <input type="text" class="form-control"
+                                                                        v-model="book.author"></div>
+                <div class="form-group"><label for="">价格</label> <input type="text" class="form-control"
+                                                                        v-model="book.price"></div>
+                <button class="btn btn-primary btn-block" v-on:click="addBook()">添加</button>
+            </div>
+
+            <p v-if='true'>dddd</p>
+        </div>
+    </div>
+</div>
+
+<script src='http://cdn.jsdelivr.net/vue/1.0.7/vue.min.js'></script>
+<!--<script src=' http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.7/vue.min.js'></script>-->
+<script src='../node_modules/vue-resource/dist/vue-resource.js'></script>
+<!--<script src="../node_modules/vue/dist/vue.js"></script>-->
+<!--<script src="../node_modules/vue/dist/vue.min.js"></script>-->
+<!--<script src="../node_modules/vue/dist/vue.runtime.js"></script>-->
+<!--<script src="../node_modules/vue/dist/vue.common.js"></script>-->
+
+<script>
+//    var Vue = require('vue');
+//    Vue.use(require('vue-resource'));
+
+    new Vue({
+        el: '#app',
+        data: {
+            sortType:'',
+            book: {id: 0, author: '', name: '', price: ''},
+            books: [{id: 1, author: '曹雪芹', name: '红楼梦', price: 32.0}, {
+                id: 2,
+                author: '施耐庵',
+                name: '水浒传',
+                price: 30.0
+            }, {id: '3', author: '罗贯中', name: '三国演义', price: 24.0}, {id: 4, author: '吴承恩', name: '西游记', price: 20.0}]
+        },
+        methods: {
+            doSomething: function () {
+                alert(1);
+            },
+            addBook: function () {
+//                console.log(this);
+//                console.log(this.book);
+                //计算书的id
+                this.book.id = this.books.length + 1;
+                this.books.push(this.book);
+                //将input中的数据重置
+                this.book = {};
+//                view未绑定test
+//                this.test = {};
+//                this.test.id = this.books.length + 1;
+//                this.books.push(this.test);
+//                //将input中的数据重置
+//                this.test = {};
+            },
+            delBook: function (book) {
+                console.log(book);
+//                $remove not Function
+//                this.book.$remove(book);
+                var _book = this.books;
+                this.books.forEach(function (val, index) {
+                    if (val === book) {
+                        _book.splice(index, 1);
+                    }
+                })
+            },
+            sortBy: function (type) {
+                this.sortType = type;
+            }
+        },
+        computed: {
+            mysum: function () {
+                var sums = 0;
+                for (var i = 0; i < this.books.length; i++) {
+                    sums += +this.books[i].price;
+                };
+                return sums;
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

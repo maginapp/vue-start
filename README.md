@@ -58,9 +58,55 @@
 5. 其他
    template 标签
    pre 标签
+   
+7. MD语法
+   ``` 行内高亮
+   换行+双tab缩进 多行文本
     
-    
+## 11-27
+1. vuejs 的计算属性
+    > 辅助完成一些复杂的逻辑运算
+    > 页面中绑定时  变量值为 ==> 函数执行后的返回值
 
+        new Vue({
+            computed:{
+                属性名: function fn(){
+                    return value
+                }
+            }
+        })
+    > view中绑定方法与methods，data属性  相同   
+        
+3. data  methods    computed
+   * data --> 具体数据
+   * methods --> 绑定方法
+   * computed --> 处理计算逻辑 （函数自执行，返回值为绑定的值）
+     
+2. commonjs/CMD(seajs)/AMD(requirejs)
+    > ???
+    *配合vue.common.js?*
+      
+            var Vue = require('vue');
+            Vue.use(require('vue-resource'));
 
-
-
+4. vue-resource插件----AJAX和jsonP
+    1. 引用
+        * 遵循CommonJS规范如3
+        * 直接引用vue-resource包
+    2. 用法
+        * Vue实例中新增：ready对象，页面加载完成是请求
+                    
+                this.$http.get(url,callback[data])
+                    .error(callback[data,status,request])
+                    
+                this.$http.post(url,postdata,callback[data])
+                     .error(callback[data,status,request])
+                
+                function callback(data){
+                    //'books'  -- data对象的键名
+                    this.$set('books', data);
+                }
+        * post请求头设置 -- Vue实例中添加如下内容
+                
+                http: { headers: {'Content-Type': 'application/x-www-form-urlencoded'} }
+               
