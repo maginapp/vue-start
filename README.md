@@ -110,4 +110,46 @@
         * post请求头设置 -- Vue实例中添加如下内容
                 
                 http: { headers: {'Content-Type': 'application/x-www-form-urlencoded'} }
-               
+     
+## 11-28
+
+1.  “Mustache” 语法（双大括号）
+    {{}}纯文本  v-html=‘’ -html格式
+2. js简单语法，字符串方法
+
+        <!-- 这是语句，不是表达式 -->
+        {{ var a = 1 }}
+        <!-- 流控制也不会生效，请使用三元表达式 -->
+        {{ if (ok) { return message } }}
+        
+3. v-bind:属性名
+    > Mustache 不能在 HTML 属性中使用，应使用 v-bind 指令：
+
+        v-bind:disabled='false|true'
+        v-bind:id='testId'
+        
+4. 自定义过滤器的另外一种方法    
+    > 写在Vue实例内部
+
+        new Vue({
+          // ...
+          filters: {
+            capitalize: function (value) {
+              if (!value) return ''
+         
+              value = value.toString()
+              return value.charAt(0).toUpperCase() + value.slice(1)
+            }
+          }
+        })
+ 
+    * 过滤器可以串联：
+
+            {{ message | filterA | filterB }}
+    * 过滤器是 JavaScript 函数，因此可以接受参数：
+    > 默认已经有了一个默认的参数value
+
+            {{ message | filterA('arg1', arg2) }}        
+    > 这里，字符串 'arg1' 将传给过滤器作为第二个参数
+    > arg2 表达式的值将被求值然后传给过滤器作为第三个参数。    
+        
