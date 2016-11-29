@@ -72,6 +72,7 @@
         new Vue({
             computed:{
                 属性名: function fn(){
+                    //this.data-key名 -->初始操作的值
                     return value
                 }
             }
@@ -152,4 +153,31 @@
             {{ message | filterA('arg1', arg2) }}        
     > 这里，字符串 'arg1' 将传给过滤器作为第二个参数
     > arg2 表达式的值将被求值然后传给过滤器作为第三个参数。    
+    
+## 11-29
+1. 指令
+    * 参数：
+    > 一些指令能接受一个“参数”，在指令后以冒号指明  类别与值。
+        * v-bind:href='url'
+        > 更新HTML元素属性
+        * v-on:click='fn'
+        > 操作DOM，监听事件
+    
+    * 修饰符
+    > 修饰符（Modifiers）是以`' . '`指明的特殊后缀，用于指出一个指定应该以特殊方式绑定    
+    > 例如.prevent 修饰符告诉 v-on 指令对于触发的事件调用 event.preventDefault()
+    
+            <form v-on:submit.prevent="onSubmit"></form>
+            
+2. 缩写
+
+* v-bind
         
+        v-bind:id='variable'
+        :id='variable'
+        
+* v-on
+        
+        v-on:mouseover='doneIt'
+        @mouseover='doneIt'
+         
