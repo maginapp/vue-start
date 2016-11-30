@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <div class="col-md-6 col-md-offset-3"><h1>Vue demo</h1>
+        <div id="app">
+<p>{{msg}}</p>
+            <p>{{splitMsg}}</p>
+            <p>{{ms1}}</p>
+            <input type="text" v-model='splitMsg'>
+            <input type="text" v-model='ms1'>
+            <input type="text" v-model='msg'>
+            <!--<p v-model='splitMsg'></p>-->
+            <input type="text"  v-model='now'>
+            <input type="text"  v-model='test'>
+            <input type="text"  v-model='test'>
+            <!--<button v-on:click='xxx'>clcik</button>-->
+            <button id='btn'>add</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'sss',
+            ms1:"s"
+        },
+        computed: {
+            splitMsg: function(){
+                return this.msg.split('').join('-');
+            },
+            now: function () {
+                return Date.now()
+            },
+            test: function () {
+                return this.now;
+            }
+        },
+        methods: {
+            xxx: function () {
+                return this.msg += '?';
+            }
+        }
+    })
+</script>
+
+<script>
+    document.getElementById('btn').onclick = function () {
+        console.log(1);
+        var input = document.createElement('input');
+        input.type = 'text';
+        input['v-model'] = 'now';
+        app.appendChild(input);
+    }
+</script>
+</body>
+</html>

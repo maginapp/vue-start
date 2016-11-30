@@ -180,4 +180,92 @@
         
         v-on:mouseover='doneIt'
         @mouseover='doneIt'
+        
+## 11-30 计算属性的特点--单向-缓存--setter双向/watch的比对/this的特点
+* 示例
+    > msg 改变 会影响 splitMsg , 单向改变
+    
+            new Vue({
+                data: {
+                    msg: 'sss'
+                },
+                computed: {
+                    splitMsg: function(){
+                        return msg.split('').join('-');
+                    }
+                }
+            })
+
+* computed属性的值  依赖传入属性
+    > 即传入属性变化 -- computed才会动态改变
+    > computed属性会缓存,不用多次请求时，多次调用函数，减小计算量
+    > 同理如果未传入依赖的变量，则缓存的值不会被刷新  
+    > 如果想避免下面例子的缓存问题，可以使用methods     
          
+            computed: {
+              now: function () {
+                return Date.now()
+              }
+            }
+
+* $watch方法与computed方法
+    > watch --> 是命令式的和重复的
+    > computed 缓存机制
+    
+            <div id="demo">{{ fullName }}</div>
+    > 修改两个参数  -- 两个函数检测fullname变化        
+
+            var vm = new Vue({
+              el: '#demo',
+              data: {
+                firstName: 'Foo',
+                lastName: 'Bar',
+                fullName: 'Foo Bar'
+              },
+              watch: {
+                firstName: function (val) {
+                  this.fullName = val + ' ' + this.lastName
+                },
+                lastName: function (val) {
+                  this.fullName = this.firstName + ' ' + val
+                }
+              }
+            })
+     
+    > 一个参数动态（firstName，lastName驱动）缓存式的改变fullname值
+     
+            var vm = new Vue({
+              el: '#demo',
+              data: {
+                firstName: 'Foo',
+                lastName: 'Bar'
+              },
+              computed: {
+                fullName: function () {
+                  return this.firstName + ' ' + this.lastName
+                }
+              }
+            })
+            
+* 计算属性的setter方法（默认只有getter）
+    > 只有getter导致数据的 单项绑定
+    > 设置setter可以改变动态的依赖的 变量 
+             
+             computed: {
+               fullName: {
+                 // getter
+                 get: function () {
+                   return this.firstName + ' ' + this.lastName
+                 },
+                 // setter
+                 set: function (newValue) {
+                   var names = newValue.split(' ')
+                   this.firstName = names[0]
+                   this.lastName = names[names.length - 1]
+                 }
+               }
+             }
+             
+    > vm.fullName = 'magina cp', vue.firstName/lastName动态改变  
+      
+### this指向Vue的实例, 属性/方法（含settet/getter）都绑定在实例上      
