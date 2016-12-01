@@ -268,4 +268,56 @@
              
     > vm.fullName = 'magina cp', vue.firstName/lastName动态改变  
       
-### this指向Vue的实例, 属性/方法（含settet/getter）都绑定在实例上      
+### this指向Vue的实例, 属性/方法（含settet/getter）都绑定在实例上  
+    
+## 12-01 watch/class
+
+### watch适用场景
+
+> 当你想要在数据变化响应时，执行*异步操作或昂贵操作*时，这是很有用的。
+
+### class
+
+> 绑定类名
+1. 绑定data的key值
+    
+        <div class="static"
+                     v-bind:class="{ active: isActive, 'text-danger': hasError }">
+                </div>
+                data: {
+                  isActive: true,
+                  hasError: false
+                }
+                
+2. 绑定对象(class名为键名)
+
+        <div v-bind:class="classObject"></div>
+        data: {
+          classObject: {
+            active: true,
+            'text-danger': false
+          }
+        }
+        
+3. 利用computed属性
+> data属性定义变量
+> computed监听属性，赋值对象给v-bind:class='obj'
+
+        <div v-bind:class="classObject"></div>
+        
+        data: {
+          isActive: true,
+          error: null
+        },
+        computed: {
+          classObject: function () {
+            return {
+              active: this.isActive && !this.error,
+              'text-danger': this.error && this.error.type === 'fatal',
+            }
+          }
+        }
+
+      
+        
+        
