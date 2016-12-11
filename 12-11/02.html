@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <div class="col-md-6 col-md-offset-3"><h1>Vue demo</h1>
+        <div id="app">
+            <ul>
+                <li v-for="item in lists">
+                    {{item}}
+                    {{item.a}}
+                    {{item.b}}
+                    <span v-model='item.a'></span>
+                    <span v-bind='item.a'></span>
+                    <input type="text" v-model='item.a'>
+                </li>
+                <li v-for="(item,index) of lists">
+                    {{index}} -- {{item.a}} --  {{item.b}}
+                </li>
+                <template v-for="(item,key,index) in obj">
+                    <li>{{index}}</li>
+                    <li>{{key}}</li>
+                    <li>{{item}}</li>
+                </template>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            lists: [{a:1,b:2},{a:2,b:4},{a:3,b:9}],
+            obj: {
+                name:'zs',
+                age:'11',
+                sex: '男'
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <div class="col-md-6 col-md-offset-3"><h1>Vue demo</h1>
+        <div id="app">
+            <h1 v-if='ok'>yes</h1>
+            <h1 v-else>no</h1>
+            <h1 v-if='false_'>yes</h1>
+
+            <template v-if="ok">
+                <h1>Title</h1>
+                <p>Paragraph 1</p>
+                <p>Paragraph 2</p>
+            </template>
+            <button v-on:click='change'>checkout</button>
+            <div v-show="ok">
+                <h1>Title</h1>
+                <p>Paragraph 1</p>
+                <p>Paragraph 2</p>
+            </div>
+            <button v-on:click='change'>checkout</button>
+        </div>
+    </div>
+</div>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            ok:true,
+            false_: true
+        },
+        methods: {
+            change:function () {
+                this.ok = !this.ok;
+            }
+        }
+    })
+</script>
+</body>
+</html>
